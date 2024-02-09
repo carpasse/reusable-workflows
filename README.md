@@ -17,13 +17,10 @@ This workflow is used to create a release and publish it to [NPM public registry
 name: Release
 on:
   push:
-    branches:
-      - master
-      - beta
-      - alpha
+    branches: ['master', 'beta', 'alpha']
 jobs:
   release:
-    uses: carpasse/reusable-workflows/.github/workflows/release@1
+    uses: carpasse/reusable-workflows/.github/workflows/release@v1
       with:
         npm-token: ${{ secrets.NPM_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -38,14 +35,11 @@ This workflow is used to validate the codebase. It runs `npm ci`, `npm build` (i
 name: Validation
 on:
   pull_request:
-    push:
-      branches:
-        - master
-        - beta
-        - alpha
+    branches: ['master', 'beta', 'alpha']
+
 jobs:
   validation:
-    uses: carpasse/reusable-workflows/.github/workflows/validation@1
+    uses: carpasse/reusable-workflows/.github/workflows/validation.yml@v1
 ```
 
 ## 📄 License
