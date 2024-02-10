@@ -3,15 +3,13 @@ name: Release & Publish
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       github_token:
         description: 'GitHub Token'
         required: true
-        type: string
       npm_token:
         description: 'NPM Token'
         required: true
-        type: string
 jobs:
   release:
     runs-on: ubuntu-latest
