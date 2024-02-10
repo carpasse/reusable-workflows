@@ -1,6 +1,8 @@
 # From https://github.com/wagoid/commitlint-github-action?tab=readme-ov-file#about-extends-in-your-config-file
 name: Lint Commit Messages
-on: [pull_request]
+
+on:
+  workflow_call:
 
 permissions:
   contents: read
