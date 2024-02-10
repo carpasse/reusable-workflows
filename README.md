@@ -15,11 +15,9 @@ This workflow is used to create a release and publish it to [NPM public registry
 
 ```yaml
 name: Release
-
 on:
   push:
     branches: ['main', 'beta', 'alpha']
-
 jobs:
   release:
     uses: carpasse/reusable-workflows/.github/workflows/release.yml@v1
@@ -34,10 +32,7 @@ This workflow is used to validate the codebase. It runs `npm ci`, `npm build` (i
 
 ```yaml
 name: Validation
-on:
-  pull_request:
-    branches: ['main', 'beta', 'alpha']
-
+on: [pull_request]
 jobs:
   validation:
     uses: carpasse/reusable-workflows/.github/workflows/validation.yml@v1
@@ -50,10 +45,7 @@ This workflow is used to validate the commit messages. It runs setups node 20 an
 
 ```yaml
 name: Lint Commit Messages
-on:
-  pull_request:
-    branches: ['main', 'beta', 'alpha']
-
+on: [pull_request]
 jobs:
   commitlint:
     uses: carpasse/reusable-workflows/.github/workflows/lintCommitMessages.yml@v1
