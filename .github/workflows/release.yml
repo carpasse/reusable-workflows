@@ -4,9 +4,6 @@ name: Release & Publish
 on:
   workflow_call:
     secrets:
-      github_token:
-        description: 'GitHub Token'
-        required: true
       npm_token:
         description: 'NPM Token'
         required: true
