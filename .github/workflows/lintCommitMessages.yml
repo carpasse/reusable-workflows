@@ -1,0 +1,22 @@
+# From https://github.com/wagoid/commitlint-github-action?tab=readme-ov-file#about-extends-in-your-config-file
+name: Lint Commit Messages
+on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      # Run the commitlint action, considering its own dependencies and yours as well 🚀
+      # `github.workspace` is the path to your repository.
+      - uses: wagoid/commitlint-github-action@v5
+        env:
+          NODE_PATH: ${{ github.workspace }}/node_modules
