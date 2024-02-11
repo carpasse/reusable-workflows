@@ -17,7 +17,7 @@ This workflow is used to create a release and publish it to [NPM public registry
 name: Release
 on:
   push:
-    branches: ['main', 'beta', 'alpha']
+    branches: ['master', 'beta', 'alpha']
 jobs:
   release:
     uses: carpasse/reusable-workflows/.github/workflows/release.yml@v1
