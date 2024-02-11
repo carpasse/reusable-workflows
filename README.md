@@ -8,47 +8,60 @@
   
 ## 📁 Workflows
 
-### [release.yml](.github/workflows/release.yml)
-This workflow is used to create a release and publish it to [NPM public registry](https://www.npmjs.com/). It uses the [semantic-release](https://www.npmjs.com/package/semantic-release)
+### [publishToNPM.yml](.github/workflows/publishToNPM.yml)
+This workflow is used to build the source code and publish it to [NPM public registry](https://www.npmjs.com/). It sets up node 20 and runs the build command and the license-check command with the `--if-present` flag. It uses the [semantic-release](https://www.npmjs.com/package/semantic-release) to do the release.
 
 #### 📝 Usage
 
 ```yaml
-name: Release
+name: Publish to NPM
 on:
   push:
     branches: ['master', 'beta', 'alpha']
 jobs:
   release:
-    uses: carpasse/reusable-workflows/.github/workflows/release.yml@v1
+    uses: carpasse/reusable-workflows/.github/workflows/publishToNPM.yml@v1
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-### [validation.yml](.github/workflows/validation.yml)
-This workflow is used to validate the codebase. It runs `npm ci`, `npm build` (if present), `npm run lint:ci`, and `npm run test`. On Node versions 18, 20 and 21.
+### [runTests.yml](.github/workflows/runTests.yml)
+This workflow is used to run the tests of the codebase. On Node versions 18, 20 and 21.
 
 #### 📝 Usage
 
 ```yaml
-name: Validation
+name: Run tests
 on: [pull_request]
 jobs:
   validation:
-    uses: carpasse/reusable-workflows/.github/workflows/validation.yml@v1
+    uses: carpasse/reusable-workflows/.github/workflows/runTests.yml@v1
 ```
 
-### [commitlint.yml](.github/workflows/commitlint.yml)
-This workflow is used to validate the commit messages. It runs setups node 20 and runs commitlint on all the messages of the Pull Request.
+### [validateCodebase.yml](.github/workflows/validateCodebase.yml)
+This workflow is used to build and lint the codebase. It sets up node 20 and runs the linting and build commands (with the `--if-present` flag).
 
 #### 📝 Usage
 
 ```yaml
-name: Lint Commit Messages
+name: Validate Codebase
+on: [pull_request]
+jobs:
+  validation:
+    uses: carpasse/reusable-workflows/.github/workflows/validateCodebase.yml@v1
+```
+
+### [validateCommits.yml](.github/workflows/validateCommits.yml)
+This workflow is used to validate the commit messages. It uses the [wagoid/commitlint-github-action@5](https://github.com/wagoid/commitlint-github-action/tree/v5/) action.
+
+#### 📝 Usage
+
+```yaml
+name: Validate commit messages
 on: [pull_request]
 jobs:
   commitlint:
-    uses: carpasse/reusable-workflows/.github/workflows/lintCommitMessages.yml@v1
+    uses: carpasse/reusable-workflows/.github/workflows/validateCommits.yml@v1
 ```
 
 ## 📄 License

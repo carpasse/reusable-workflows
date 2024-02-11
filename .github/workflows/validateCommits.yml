@@ -1,5 +1,5 @@
 # From https://github.com/wagoid/commitlint-github-action?tab=readme-ov-file#about-extends-in-your-config-file
-name: Lint Commit Messages
+name: Validate commit messages
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  commitlint:
+  validate-commits:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
